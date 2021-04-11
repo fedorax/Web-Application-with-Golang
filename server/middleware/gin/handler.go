@@ -1,6 +1,7 @@
 package gin
 
 import (
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -14,5 +15,16 @@ func Setup() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	// custom error
+	r.NoRoute(func(c *gin.Context) {
+		code := http.StatusNotFound
+		c.JSON(code, gin.H{"code": code, "message": http.StatusText(code)})
+	})
+
+	// custom error
+	r.NoMethod(func(c *gin.Context) {
+		code := http.StatusMethodNotAllowed
+		c.JSON(code, gin.H{"code": code, "message": http.StatusText(code)})
+	})
 	return r
 }
