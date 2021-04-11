@@ -1,0 +1,9 @@
+{
+	"sessionSecret": "developmentSessionSecret",
+	"http": {
+		"port": "3000",
+		"bind": "localhost",
+		"ReadTimeout": 10,
+		"WriteTimeout": 10
+	}
+}
