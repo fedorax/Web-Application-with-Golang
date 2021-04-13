@@ -1,10 +1,9 @@
 package gin
 
 import (
-	"log"
 	"net/http"
 	"os"
-	"path/filepath"
+	"server/router"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,12 +16,14 @@ func Setup() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	dir, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
+	// dir, err := os.Getwd()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	r.Static("/", filepath.Join(dir, "./public"))
+	r = router.InitRouter(r)
+	//	r.Static("/", filepath.Join(dir, "./public"))
+
 	// custom error
 	r.NoRoute(func(c *gin.Context) {
 		code := http.StatusNotFound
