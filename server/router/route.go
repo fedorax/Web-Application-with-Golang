@@ -7,6 +7,7 @@ import (
 )
 
 func InitRouter(app *gin.Engine) *gin.Engine {
+
 	// Ping test
 	app.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": http.StatusText(http.StatusOK), "message": "pong"})
@@ -19,7 +20,7 @@ func InitRouter(app *gin.Engine) *gin.Engine {
 	//	  "foo":  "bar",
 	//	  "manu": "123",
 	//}))
-	authorized := app.Group("/", gin.BasicAuth(gin.Accounts{
+	authorized := app.Group("/api", gin.BasicAuth(gin.Accounts{
 		"foo":  "bar", // user:foo password:bar
 		"manu": "123", // user:manu password:123
 	}))

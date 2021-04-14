@@ -5,6 +5,7 @@ import (
 	"os"
 	"server/router"
 
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,13 +17,9 @@ func Setup() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	// dir, err := os.Getwd()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	r.Use(static.Serve("/", static.LocalFile("./public", true)))
 
 	r = router.InitRouter(r)
-	//	r.Static("/", filepath.Join(dir, "./public"))
 
 	// custom error
 	r.NoRoute(func(c *gin.Context) {
